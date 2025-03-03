@@ -1,0 +1,42 @@
+2025-03-03 11:37:43,687 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 11:37:43,775 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 11:37:43,854 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:37:46,565 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:37:48,179 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:37:48,845 - docling.pipeline.base_pipeline - INFO - Processing document tmpjxfy5cde.pdf
+2025-03-03 11:38:14,692 - docling.document_converter - INFO - Finished converting document tmpjxfy5cde.pdf in 30.99 sec.
+2025-03-03 11:39:01,961 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 11:39:02,021 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 11:39:02,082 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:39:04,321 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:39:05,739 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:39:06,295 - docling.pipeline.base_pipeline - INFO - Processing document tmpwegbqt9l.pdf
+2025-03-03 11:39:29,464 - docling.document_converter - INFO - Finished converting document tmpwegbqt9l.pdf in 27.50 sec.
+2025-03-03 11:51:23,463 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 11:51:23,533 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 11:51:23,617 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:51:26,240 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:51:29,868 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:51:30,461 - docling.pipeline.base_pipeline - INFO - Processing document tmp0eyr_o4c.pdf
+2025-03-03 11:52:00,307 - docling.document_converter - INFO - Finished converting document tmp0eyr_o4c.pdf in 36.84 sec.
+2025-03-03 11:57:31,142 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 11:57:31,203 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 11:57:31,274 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:57:33,601 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:57:35,252 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 11:57:35,826 - docling.pipeline.base_pipeline - INFO - Processing document tmppu7z27b0.pdf
+2025-03-03 11:58:01,983 - docling.document_converter - INFO - Finished converting document tmppu7z27b0.pdf in 30.83 sec.
+2025-03-03 12:06:26,777 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 12:06:26,846 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 12:06:26,911 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 12:06:29,087 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 12:06:30,164 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 12:06:30,529 - docling.pipeline.base_pipeline - INFO - Processing document tmps14bk9i1.pdf
+2025-03-03 12:06:55,449 - docling.document_converter - INFO - Finished converting document tmps14bk9i1.pdf in 28.66 sec.
+2025-03-03 13:46:47,025 - document_pipeline - INFO - Found 1 PDF files
+2025-03-03 13:46:47,096 - docling.document_converter - INFO - Going to convert document batch...
+2025-03-03 13:46:47,174 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 13:46:49,314 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 13:46:50,715 - docling.utils.accelerator_utils - INFO - Accelerator device: 'cpu'
+2025-03-03 13:46:51,295 - docling.pipeline.base_pipeline - INFO - Processing document tmpvv8ez5mu.pdf
+2025-03-03 13:47:11,252 - docling.document_converter - INFO - Finished converting document tmpvv8ez5mu.pdf in 24.22 sec.
