@@ -13,13 +13,14 @@ class DocumentProcessor:
         self.pdf_dir = pdf_dir
         self.output_file = output_file
         self.csv_headers = None
-        self.results = []
+        self.csv_file = None
+        self.writer = None
 
         # Initialize GLiNER model
         self.model = GLiNER.from_pretrained("urchade/gliner_medium-v2.1")
 
         # Initialize spaCy model
-        self.nlp = spacy.blank("en")
+        self.nlp = spacy.load("en_core_web_trf")
 
         # Initialize spaCy Layout model
         self.layout = spaCyLayout(self.nlp)
@@ -27,18 +28,24 @@ class DocumentProcessor:
         # Process all PDFs
         self.process_pdfs()
 
-        # Write results to CSV
-        self.write_to_csv()
+        # Close CSV file if still open
+        if self.csv_file and not self.csv_file.closed:
+            self.csv_file.close()
+            print(f"Results written to {self.output_file}")
 
     def process_pdfs(self):
-        for pdf_file in get_pdf_files(self.pdf_dir):
+        pdf_files = get_pdf_files(self.pdf_dir)
+
+        if not pdf_files:
+            print("No PDF files found in the directory")
+            return
+
+        for pdf_file in pdf_files:
             first_page = extract_first_page(pdf_file)
             original_filename = extract_original_filename(pdf_file)
 
             result = self.layout(first_page)
-
             text = result.text
-
             print(f"TEXT: {text}")
 
             result = process_document(
@@ -50,37 +57,25 @@ class DocumentProcessor:
 
             print(f"Extracted entities: {result}")
 
-            # Store the result for CSV output
-            self.results.append(result)
+            # Write the result to CSV immediately
+            self.write_result_to_csv(result)
 
-            # Set headers based on the first result if not already set
-            if self.csv_headers is None and result:
-                self.csv_headers = list(result.keys())
-
-    def write_to_csv(self):
-        if not self.results:
-            print("No results to write to CSV")
+    def write_result_to_csv(self, result):
+        if not result:
             return
 
-        with open(self.output_file, "w", newline="") as csvfile:
-            writer = None
+        # If this is the first result, set up the CSV file and headers
+        if self.csv_file is None:
+            self.csv_headers = list(result.keys())
+            self.csv_file = open(self.output_file, "w", newline="")
+            self.writer = csv.DictWriter(self.csv_file, fieldnames=self.csv_headers)
+            self.writer.writeheader()
 
-            # Initialize writer with headers
-            if self.csv_headers:
-                writer = csv.DictWriter(csvfile, fieldnames=self.csv_headers)
-                writer.writeheader()
-            else:
-                # Fallback if no headers were found
-                writer = csv.writer(csvfile)
+        # Write the current result
+        self.writer.writerow(result)
 
-            # Write each result to the CSV
-            for result in self.results:
-                if writer.__class__ == csv.DictWriter:
-                    writer.writerow(result)
-                else:
-                    writer.writerow(result.values())
-
-        print(f"Results written to {self.output_file}")
+        # Flush to ensure data is written to disk
+        self.csv_file.flush()
 
 
 if __name__ == "__main__":

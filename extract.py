@@ -60,7 +60,13 @@ def extract_entities(markdown_text, model, original_filename, batch_type):
         else:
             for entity in gliner_result:
                 if entity["label"] == "resolution_number":
-                    entities["resolution_number"] = entity["text"]
+                    # Clean up the resolution number from gliner
+                    clean_res = re.search(
+                        r"(\d+(?:[- ]?\d+)*(?:-[A-Z])?)", entity["text"]
+                    )
+                    entities["resolution_number"] = (
+                        clean_res.group(1) if clean_res else entity["text"]
+                    )
                     break
         entities["ordinance_number"] = ordinance_number
 
@@ -79,40 +85,16 @@ def extract_entities(markdown_text, model, original_filename, batch_type):
         else:
             for entity in gliner_result:
                 if entity["label"] == "ordinance_number":
-                    entities["ordinance_number"] = entity["text"]
+                    # Clean up the ordinance number from gliner
+                    clean_ord = re.search(
+                        r"(\d+(?:[- ]?\d+)*(?:-[A-Z])?)", entity["text"]
+                    )
+                    entities["ordinance_number"] = (
+                        clean_ord.group(1) if clean_ord else entity["text"]
+                    )
                     break
 
         entities["resolution_number"] = resolution_number
-    # Extract ordinance_no with more robust pattern
-    # ordinance_match = re.search(
-    #     r"(?:ORDINANCE[_ ]*(?:NO\.?|NUMBER)[_ ]*|ORDINANCE[_ ]*)[:\.\-_ ]*(\d+(?:[- ]?\d+)*(?:-[A-Z])?)",
-    #     markdown_text,
-    #     re.IGNORECASE,
-    # )
-
-    # if not ordinance_match:
-    #     for entity in gliner_result:
-    #         if entity["label"] == "ordinance_number":
-    #             entities["ordinance_number"] = entity["text"]
-    #             break
-
-    # if ordinance_match:
-    #     entities["ordinance_number"] = ordinance_match.group(1).strip()
-
-    # # Extract resolution_no with more robust pattern
-    # resolution_match = re.search(
-    #     r"(?:RES[OQ]LUTION[_ ]*(?:NO\.?|NUMBER)[_ ]*|RES[OQ]LUTION[_ ]*)[:\.\-_ ]*(\d+(?:[- ]?\d+)*(?:-[A-Z])?)",
-    #     markdown_text,
-    #     re.IGNORECASE,
-    # )
-    # if not resolution_match:
-    #     for entity in gliner_result:
-    #         if entity["label"] == "resolution_number":
-    #             entities["resolution_number"] = entity["text"]
-    #             break
-
-    # if resolution_match:
-    #     entities["resolution_number"] = resolution_match.group(1).strip()
 
     # Extract proponent
     proponent_match = re.search(r"Proponent:\s+(.*?)$", markdown_text, re.MULTILINE)
@@ -125,10 +107,9 @@ def extract_entities(markdown_text, model, original_filename, batch_type):
     if not proponent_match:
         for entity in gliner_result:
             if entity["label"] == "author":
-                proponent_match = entity["text"]
+                entities["proponent"] = entity["text"]
                 break
-
-    if proponent_match:
+    else:
         entities["proponent"] = proponent_match.group(1).strip()
 
     if entities["proponent"]:
